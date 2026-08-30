@@ -1,13 +1,12 @@
 import React from 'react';
 
-const Footer: React.FC = () => {
+
+
+export default function Footer() {
     return (
-        <footer className="text-white p-10 pb-40">
-            <div className="footer-content">
-                <p>&copy; {new Date().getFullYear()} Mikael Albuquerque. All rights reserved.</p>
-            </div>
+        <footer className="text-white p-10 pb-40 mt-20 bg-black">
+            <p>&copy; {new Date().getFullYear()} Mikael Albuquerque. All rights reserved.</p>
+            <p>This project was created with the support of the Software Factory 2026.2 workshop.</p>
         </footer>
     );
 };
-
-export default Footer;
