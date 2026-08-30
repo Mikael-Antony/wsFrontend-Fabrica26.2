@@ -5,7 +5,7 @@ import Link from 'next/link';
 import SearchBar from './searchBar/SearchBar';
 
 export default function Header() {
-    const image = "/Overwatch_Icon.png"
+    const image = "/overwatch_icon.png"
     const [results, setResults] = useState<any[]>([])
     return (
         <header className=" shadow sticky top-0 z-100">
