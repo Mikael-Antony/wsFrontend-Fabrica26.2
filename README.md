@@ -1,193 +1,289 @@
-# OverPedia
+# 🎮 OverPedia
 
-Projeto acadêmico desenvolvido como desafio final do processo seletivo / formação da Fábrica de Software 2026.2. A aplicação foi criada para explorar a construção de uma interface web de consulta de heróis do universo Overwatch, consumindo dados de uma API pública e apresentando os personagens em uma experiência visual inspirada no estilo do jogo.
+> Uma enciclopédia interativa de heróis de **Overwatch**, desenvolvida com Next.js e integrada à OverFast API.
 
-## Visão geral
+O **OverPedia** é um projeto acadêmico desenvolvido como desafio final do processo seletivo e formação da **Fábrica de Software 2026.2**.
 
-O OverPedia é uma aplicação web que permite:
+A aplicação foi criada com o objetivo de praticar conceitos de desenvolvimento Front-End moderno, como **React, Next.js, TypeScript, consumo de APIs REST, componentização, arquitetura de projetos e desenvolvimento de interfaces responsivas**.
 
-- visualizar uma grade de heróis;
-- acessar informações detalhadas de cada personagem;
-- consultar atributos, habilidades, perks, poderes e histórias;
-- navegar entre páginas com roteamento dinâmico em Next.js.
+---
 
-O projeto foi pensado como uma demonstração prática de front-end moderno, integrando consumo de API, renderização de componentes, organização de pastas e usabilidade em páginas de conteúdo.
+## ✨ Sobre o projeto
 
-## Contexto acadêmico
+O OverPedia permite explorar informações dos heróis do universo de Overwatch através de uma interface inspirada na identidade visual do jogo.
 
-Este projeto foi desenvolvido em um ambiente educacional com foco em:
+Entre as principais funcionalidades estão:
 
-- aprendizado de desenvolvimento web com React e Next.js;
-- organização de projetos em arquitetura de componentes;
-- consumo de APIs REST com Axios;
-- criação de interfaces responsivas e estilização com Tailwind CSS;
-- aplicação de conceitos de trabalho em equipe, documentação e apresentação de protótipos.
+* 🦸 Listagem dos heróis em uma grade responsiva;
+* 🔎 Consulta de informações individuais dos personagens;
+* 📄 Página de detalhes para cada herói;
+* ❤️ Exibição de atributos e pontos de vida;
+* ⚡ Informações sobre habilidades, perks e poderes;
+* 📖 Descrições e informações narrativas;
+* 🖼️ Utilização de imagens e elementos visuais dos personagens;
+* 🔗 Navegação através de rotas dinâmicas do Next.js;
+* 🌐 Consumo de dados em tempo real através de uma API externa.
 
-Dessa forma, o app funciona como um projeto didático e de portfólio, sendo voltado para estudo, validação de conceitos e apresentação do aprendizado adquirido durante a formação.
+---
 
-## Stack tecnológica
+## 🛠️ Tecnologias utilizadas
 
-A aplicação foi construída com as seguintes tecnologias e bibliotecas:
+| Tecnologia         | Utilização                            |
+| ------------------ | ------------------------------------- |
+| **Next.js 16**     | Framework principal da aplicação      |
+| **React 19**       | Construção da interface e componentes |
+| **TypeScript**     | Tipagem estática                      |
+| **Tailwind CSS 4** | Estilização e responsividade          |
+| **Axios**          | Comunicação com a API                 |
+| **React Icons**    | Ícones da interface                   |
+| **ESLint**         | Padronização e análise do código      |
+| **Geist**          | Tipografia da aplicação               |
 
-- Next.js 16.3.3
-- React 19.2.8
-- React DOM 19.2.8
-- TypeScript 5
-- Tailwind CSS 4
-- Axios 1.20.0
-- React Icons 5.7.0
-- ESLint 9
-- Geist e Geist Mono (fontes do Next.js via next/font/google)
+---
 
-### API utilizada
+## 🌐 API
 
-Os dados dos personagens são obtidos por meio da API pública Overfast:
+Os dados dos personagens são obtidos através da **OverFast API**, uma API pública que disponibiliza informações relacionadas aos heróis de Overwatch.
 
-- https://overfast-api.tekrop.fr
+**API utilizada:**
 
-A API fornece informações sobre os heróis, incluindo nome, função, descrição, habilidades, perks, imagens e dados de narrativa.
+[OverFast API](https://overfast-api.tekrop.fr?utm_source=chatgpt.com)
 
-## Estrutura do projeto
+Entre os dados utilizados pela aplicação estão:
 
-A estrutura principal do repositório está organizada da seguinte forma:
+* Nome;
+* Função;
+* Descrição;
+* Imagens;
+* Habilidades;
+* Perks;
+* Poderes;
+* Informações narrativas;
+* Atributos dos personagens.
+
+---
+
+## 🏗️ Arquitetura
+
+O projeto utiliza uma organização baseada na separação de responsabilidades entre **páginas, componentes e serviços**.
 
 ```text
-wsFrontend-Fabrica26.2/
-├── README.md
-├── LICENSE
-└── overpedia/
-    ├── package.json
-    ├── next.config.ts
-    ├── tsconfig.json
-    ├── eslint.config.mjs
-    ├── postcss.config.mjs
-    ├── next-env.d.ts
-    ├── public/
-    │   ├── Overwatch_Icon.png
-    │   └── Overpedia_hero_image.png
-    └── src/
-        ├── app/
-        │   ├── globals.css
-        │   ├── layout.tsx
-        │   ├── page.tsx
-        │   └── hero/
-        │       └── [key]/
-        │           └── page.tsx
-        ├── components/
-        │   ├── apiUtilitaries/
-        │   │   ├── heroesCount.tsx
-        │   │   └── heroesGrid.tsx
-        │   ├── footer/
-        │   │   └── Footer.tsx
-        │   ├── header/
-        │   │   ├── Header.tsx
-        │   │   └── searchBar/
-        │   │       └── SearchBar.tsx
-        │   ├── hero/
-        │   │   └── Hero.tsx
-        │   └── heroes/
-        │       └── hero/
-        │           ├── TitleHeroSection.tsx
-        │           └── hitPoints/
-        │               └── HitPoints.tsx
-        └── services/
-            ├── getHero.ts
-            ├── getHeroes.ts
-            └── overfastApi.ts
+src/
+├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── hero/
+│       └── [key]/
+│           └── page.tsx
+│
+├── components/
+│   ├── apiUtilitaries/
+│   │   ├── heroesCount.tsx
+│   │   └── heroesGrid.tsx
+│   │
+│   ├── footer/
+│   │   └── Footer.tsx
+│   │
+│   ├── header/
+│   │   ├── Header.tsx
+│   │   └── searchBar/
+│   │       └── SearchBar.tsx
+│   │
+│   ├── hero/
+│   │   └── Hero.tsx
+│   │
+│   └── heroes/
+│       └── hero/
+│           ├── TitleHeroSection.tsx
+│           └── hitPoints/
+│               └── HitPoints.tsx
+│
+└── services/
+    ├── getHero.ts
+    ├── getHeroes.ts
+    └── overfastApi.ts
 ```
 
-## Organização funcional
+### Services
 
-### 1. Camada de serviços
+A comunicação com a API é centralizada na pasta `services`.
 
-Na pasta `src/services`, a comunicação com a API acontece por meio de módulos dedicados:
+* `overfastApi.ts` — configuração da instância Axios;
+* `getHeroes.ts` — consulta a lista de heróis;
+* `getHero.ts` — consulta os dados de um herói específico.
 
-- `overfastApi.ts`: instância central do cliente Axios;
-- `getHeroes.ts`: busca a lista completa de heróis;
-- `getHero.ts`: busca os detalhes de um personagem específico pelo identificador `key`.
+Essa separação evita concentrar a lógica de comunicação HTTP diretamente nos componentes da interface.
 
-### 2. Rotas da aplicação
+---
 
-Dentro de `src/app`:
+## 📁 Principais componentes
 
-- `page.tsx`: página inicial com o banner inicial e a grade de heróis;
-- `layout.tsx`: estrutura global da aplicação, com `Header`, `Footer` e estilos base;
-- `hero/[key]/page.tsx`: rota dinâmica para mostrar a ficha completa do herói.
+### `Header`
 
-### 3. Componentes reutilizáveis
+Responsável pela navegação principal da aplicação e pelo campo de pesquisa.
 
-Os componentes são separados por responsabilidade:
+### `Hero`
 
-- `Header`: navegação principal do site;
-- `Footer`: rodapé da aplicação;
-- `Hero`: seção introdutória da home;
-- `HeroesGrid`: renderiza os cards dos heróis;
-- `HitPoints`: mostra as estatísticas do personagem;
-- `TitleHeroSection`: titulação de seções do perfil do herói.
+Componente responsável pela apresentação inicial da página principal.
 
-### 4. Estilo e apresentação
+### `HeroesGrid`
 
-A estilização foi feita com Tailwind CSS, com uso de classes responsivas e visual em tema escuro, tendo como referência a identidade visual de Overwatch e a apresentação de grandes informações em interfaces dinâmicas.
+Renderiza os personagens retornados pela API em uma grade responsiva.
 
-## Funcionalidades implementadas
+### `HitPoints`
 
-- listagem dos heróis em grid responsiva;
-- navegação por página de detalhes do personagem;
-- carregamento de dados em tempo real da API externa;
-- apresentação de atributos e descrições dos heróis;
-- exibição de habilidades, perks, poderes e história;
-- uso de imagens, vídeos e backgrounds para enriquecer a apresentação.
+Apresenta informações relacionadas aos pontos de vida do personagem.
 
-## Como executar o projeto
+### `TitleHeroSection`
 
-1. Acesse a pasta do projeto:
+Componente reutilizável para padronizar os títulos das diferentes seções da página de detalhes.
+
+### `[key]`
+
+Rota dinâmica responsável por gerar a página individual de cada herói.
+
+Exemplo:
+
+```text
+/hero/tracer
+/hero/reinhardt
+/hero/genji
+```
+
+---
+
+## 🚀 Como executar
+
+### 1. Clone o repositório
 
 ```bash
-cd overpedia
+git clone <URL_DO_REPOSITORIO>
 ```
 
-2. Instale as dependências:
+### 2. Entre na pasta do projeto
+
+```bash
+cd wsFrontend-Fabrica26.2/overpedia
+```
+
+### 3. Instale as dependências
 
 ```bash
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+### 4. Execute o servidor de desenvolvimento
 
 ```bash
 npm run dev
 ```
 
-4. Abra o navegador em:
+### 5. Acesse a aplicação
 
 ```text
 http://localhost:3000
 ```
 
-## Scripts disponíveis
+---
 
-No arquivo `package.json`, o projeto inclui os seguintes comandos:
+## 📜 Scripts disponíveis
 
 ```bash
 npm run dev
+```
+
+Executa a aplicação em ambiente de desenvolvimento.
+
+```bash
 npm run build
+```
+
+Gera a versão de produção da aplicação.
+
+```bash
 npm run start
+```
+
+Executa a aplicação em ambiente de produção.
+
+```bash
 npm run lint
 ```
 
-## Observações sobre o desenvolvimento
-
-Este é um projeto acadêmico e experimental, portanto sua estrutura reflete um processo de estudo e prototipação. Há componentes que demonstram o uso da arquitetura de aplicações modernas com Next.js, mas também deixam espaço para evoluções futuras, como:
-
-- refinamento do campo de busca;
-- otimização de carregamento de imagens e vídeos;
-- ajustes de acessibilidade e UX;
-- melhor organização de tipagens e validações de dados;
-- expansão do conteúdo e melhorias visuais.
-
-## Conclusão
-
-O OverPedia representa uma aplicação front-end funcional e visualmente orientada ao universo de Overwatch, com foco em consumo de dados, organização de componentes e criação de experiências de navegação. Como projeto acadêmico, ele evidencia os conceitos aprendidos durante a formação e serve como base para futuras melhorias e adaptações em contextos profissionais.
+Executa a análise estática do código utilizando ESLint.
 
 ---
 
+## 🎓 Contexto acadêmico
+
+O projeto foi desenvolvido durante a formação da **Fábrica de Software 2026.2**, com foco na aplicação prática de conceitos de desenvolvimento Front-End.
+
+Durante o desenvolvimento foram trabalhados conceitos como:
+
+* HTML, CSS e JavaScript;
+* React;
+* Next.js;
+* TypeScript;
+* Tailwind CSS;
+* Consumo de APIs REST;
+* Axios;
+* Componentização;
+* Organização e arquitetura de projetos;
+* Clean Code;
+* Git semântico;
+* Documentação de software.
+
+A utilização de bibliotecas e tecnologias adicionais foi realizada buscando compreender seu funcionamento e sua aplicação dentro do projeto.
+
+---
+
+## 🧹 Princípios de desenvolvimento
+
+O projeto segue algumas práticas recomendadas durante a formação:
+
+**Código limpo**
+
+Busca por código legível, organizado e com responsabilidades bem definidas.
+
+**Separação de responsabilidades**
+
+A comunicação com a API é mantida separada da camada de apresentação através da pasta `services`.
+
+**Componentização**
+
+A interface é dividida em componentes reutilizáveis e organizados por responsabilidade.
+
+**Git semântico**
+
+O desenvolvimento utiliza commits com mensagens padronizadas e descritivas.
+
+---
+
+## 🔮 Próximos passos
+
+Algumas melhorias podem ser implementadas futuramente:
+
+* [ ] Refinar o sistema de pesquisa;
+* [ ] Melhorar o tratamento de erros da API;
+* [ ] Adicionar estados de carregamento;
+* [ ] Aprimorar acessibilidade;
+* [ ] Otimizar carregamento de imagens e vídeos;
+* [ ] Melhorar tipagens e validações dos dados recebidos;
+* [ ] Expandir o conteúdo das páginas dos heróis;
+* [ ] Refinar a experiência de navegação e UX.
+
+---
+
+## 📄 Licença
+
+Este projeto está disponível sob a licença definida no arquivo [`LICENSE`](./LICENSE).
+
+---
+
+## 👨‍💻 Projeto
+
+**OverPedia**
+Projeto acadêmico — Fábrica de Software 2026.2
+
+Desenvolvido com React, Next.js, TypeScript e OverFast API.
