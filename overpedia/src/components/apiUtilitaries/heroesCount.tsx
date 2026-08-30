@@ -1,6 +1,8 @@
 import { overfastApi } from "@/services/overfastApi";
 
-
+/*
+  busca e conta quantos herois foram encontrados na requisicao api
+*/
 export async function fetchHeroesCount() {
   const response = await overfastApi.get('/heroes');
   return response.data.length;

@@ -1,8 +1,8 @@
-import HeroesCount from "../api/heroesCount";
+import HeroesCount from "../apiUtilitaries/heroesCount";
 
 export default function Hero() {
   const image = "/Overpedia_hero_image.png";
-
+    /*cabelho hero da pagina main*/
   return (
     <div className=" flex flex-col items-center justify-center gap-10 w-full py-10 px-5 dark:bg-gray-950 mb-10">
       <div className=" flex items-center flex-col md:flex-row justify-around gap-5 w-full h-full">

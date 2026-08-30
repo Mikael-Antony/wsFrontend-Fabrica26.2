@@ -1,4 +1,4 @@
-import HeroesGrid from "@/components/api/heroesGrid";
+import HeroesGrid from "@/components/apiUtilitaries/heroesGrid";
 import Hero from "@/components/hero/Hero";
 
 export default function Home() {

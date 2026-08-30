@@ -41,6 +41,7 @@ export default function HitPoints({ health, armor, shield, total}: Hitpoints) {
       <div><span className="text-lg font-bold">{total} / {total}</span></div>
 
       <div className="flex mb-5">
+        {/*organizacao dos dados de hitpoint de personagem*/}
         {HitPointsBlocks.map((block, blockIndex) => (
           <div key={`${block.color}-${blockIndex}`} className="flex relative justify-center ">
             {block.value? 

@@ -13,7 +13,6 @@ export default function SearchBar({ onSearchResults }: SearchBarProps) {
     e.preventDefault()
     return console.log(e)
   }
-
   return (
     <form onSubmit={handleSearch} className="flex gap-2">
       <input
