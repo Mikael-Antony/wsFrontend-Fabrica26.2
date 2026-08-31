@@ -166,7 +166,7 @@ export default async function hero({ params }: PageProps) {
         <TitleHero title="Stadium Powers"/>
         <section className="grid grid-cols-4 gap-5 items-end">
           {hero.stadium_powers?.map((stadiumpower) => (
-            <div key={stadiumpower.name} className="flex flex-col justify-start gap-5 items-center bg-gray-950 rounded-xl w-60 h-115 p-5">
+            <div key={stadiumpower.name} className="flex flex-col justify-start gap-5 items-center bg-gray-950 rounded-xl w-60 h-115 p-5 hover:scale-110 duration-500 ease-in-out ">
               <img src={stadiumpower.icon} alt={`${stadiumpower.name} stadium power`} className="w-60" />
               <h4 className="text-2xl font-bold text-orange-400 ">{stadiumpower.name}</h4>
               <p className="w-50 text-sm">{stadiumpower.description}</p>
