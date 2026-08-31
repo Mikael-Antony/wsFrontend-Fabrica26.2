@@ -32,11 +32,11 @@ interface StadiumPower {
 
 interface Story {
   summary: string;
-  media?:{
+  media?: {
     type: string;
     link: string;
   };
-  chapters:{
+  chapters: {
     title: string;
     picture: string;
     content: string;
@@ -71,7 +71,7 @@ interface HeroType {
 export default async function hero({ params }: PageProps) {
   const { key } = await params;
   const hero: HeroType = await getHero(key);
-  
+
 
   return (
 
@@ -105,10 +105,10 @@ export default async function hero({ params }: PageProps) {
         <section className="flex justify-center items-center gap-20 m-10 ">
           <h2 className="text-3xl font-bold">Hit points:</h2>
 
-          <HitPoints health={hero.hitpoints.health} armor={hero.hitpoints.armor} shield={hero.hitpoints.shields} total={hero.hitpoints.total}/>
+          <HitPoints health={hero.hitpoints.health} armor={hero.hitpoints.armor} shield={hero.hitpoints.shields} total={hero.hitpoints.total} />
         </section>
 
-        <TitleHero title="Ability"/>
+        <TitleHero title="Ability" />
         <section className="flex flex-col gap-10 max-w-6xl">
           <div className="flex flex-col justify-center items-center gap-10">
             {hero.abilities.map((ability) => (
@@ -128,7 +128,7 @@ export default async function hero({ params }: PageProps) {
           </div>
         </section>
 
-        <TitleHero title="Perks"/>
+        <TitleHero title="Perks" />
         <section className="flex justify-center items-center gap-20">
           <div className="flex flex-col gap-10">
             <h3 className="text-3xl text-orange-400 font-bold">major</h3>
@@ -163,18 +163,22 @@ export default async function hero({ params }: PageProps) {
           </div>
         </section>
 
-        <TitleHero title="Stadium Powers"/>
-        <section className="grid grid-cols-4 gap-5 items-end">
-          {hero.stadium_powers?.map((stadiumpower) => (
-            <div key={stadiumpower.name} className="flex flex-col justify-start gap-5 items-center bg-gray-950 rounded-xl w-60 h-115 p-5 hover:scale-110 duration-500 ease-in-out ">
-              <img src={stadiumpower.icon} alt={`${stadiumpower.name} stadium power`} className="w-60" />
-              <h4 className="text-2xl font-bold text-orange-400 ">{stadiumpower.name}</h4>
-              <p className="w-50 text-sm">{stadiumpower.description}</p>
-            </div>
-          ))}
-        </section>
+        {hero.stadium_powers && hero.stadium_powers.length > 0 && (
+          <>
+            <TitleHero title="Stadium Powers" />
+            <section className="grid grid-cols-4 gap-5 items-end">
+              {hero.stadium_powers.map((stadiumpower) => (
+                <div key={stadiumpower.name} className="flex flex-col justify-start gap-5 items-center bg-gray-950 rounded-xl w-60 h-115 p-5 hover:scale-110 duration-500 ease-in-out ">
+                  <img src={stadiumpower.icon} alt={`${stadiumpower.name} stadium power`} className="w-60" />
+                  <h4 className="text-2xl font-bold text-orange-400 ">{stadiumpower.name}</h4>
+                  <p className="w-50 text-sm">{stadiumpower.description}</p>
+                </div>
+              ))}
+            </section>
+          </>
+        )}
 
-        <TitleHero title="Story"/>
+        <TitleHero title="Story" />
         <section className="flex flex-col items-center gap-10 ">
           <h3 className="text-3xl text-orange-400 font-bold">sumary</h3>
           <div className="flex gap-5 snap-center">
@@ -199,9 +203,9 @@ export default async function hero({ params }: PageProps) {
           <h4 className="text-2xl text-orange-400 font-bold">Chapters</h4>
           {hero.story.chapters?.map((chapter) => (
             <div key={chapter.title} className="relative h-150 overflow-hidden ">
-              <img src={chapter.picture} alt={`chapter ${chapter.title} image`} className="w-screen bg-cover "/>
+              <img src={chapter.picture} alt={`chapter ${chapter.title} image`} className="w-screen bg-cover " />
               <div className="absolute top-0 p-10 flex flex-col justify-between size-full">
-                <h5 className="text-2xl text-orange-400 font-bold bg-gray-950/50 py-2 px-4 hover:bg-gray-900 duration-500 ease-in-out size-fit">{chapter.title}</h5> 
+                <h5 className="text-2xl text-orange-400 font-bold bg-gray-950/50 py-2 px-4 hover:bg-gray-900 duration-500 ease-in-out size-fit">{chapter.title}</h5>
                 <p className="bg-gray-950/50 py-2 px-4 hover:bg-gray-950 duration-500 ease-in-out">{chapter.content}</p>
               </div>
             </div>
