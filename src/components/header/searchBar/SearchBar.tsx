@@ -1,34 +1,34 @@
 'use client'
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
-interface SearchBarProps {
-  onSearchResults: (results: any[]) => void
-}
+import Link from "next/link";
+import { HiOutlineSearch } from "react-icons/hi";
 
-export default function SearchBar({ onSearchResults }: SearchBarProps) {
-  const [query, setQuery] = useState('')
-  const [loading, setLoading] = useState(false)
+export default function SearchBar() {
+  const [search, setSearch] = useState('')
+  const pathname = usePathname();
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault()
-    return console.log(e)
-  }
+  /* limpa a barra de busca */ 
+  useEffect(() => {
+    if (pathname !== '/search') {
+      setSearch('');
+    }
+  }, [pathname]);
+  /* envia par o SearchHeroGrid o termo de busca */
   return (
-    <form onSubmit={handleSearch} className="flex gap-2">
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Digite para pesquisar..."
-        className="border p-2 rounded w-full"
-      />
-      <button 
-        type="submit" 
-        disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        {loading ? 'Buscando...' : 'Pesquisar'}
-      </button>
-    </form>
+    <Link href={`/search?q=${encodeURIComponent(search)}`} className=" border border-orange-400 p-1 rounded-2xl w-[25%]">
+      <form className="flex justify-center items-center" onSubmit={(e) => e.preventDefault()}>
+        <input
+          className="text-sm focus:outline-none  px-2 w-full"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar herói..."
+        />
+        <button type="submit">
+          <HiOutlineSearch className="bg-orange-400 p-1 rounded-2xl  text-2xl font-bold" />
+        </button>
+      </form>
+    </Link>
   )
 }
