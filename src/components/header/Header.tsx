@@ -17,7 +17,7 @@ export default function Header() {
                             <Link translate="no" href="/">Home</Link>
                         </li>
                         <li>
-                            <Link href="https://github.com/Mikael-Antony/wsFrontend-Fabrica26.2">About</Link>
+                            <Link href="https://github.com/Mikael-Antony/wsFrontend-Fabrica26.2" target='_blank'>About</Link>
                         </li>
                     </ul>
                 </div>
