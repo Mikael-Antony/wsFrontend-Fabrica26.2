@@ -78,7 +78,7 @@ export default async function hero({ params }: PageProps) {
     <>
       <section className="flex flex-col justify-center gap-20 items-center overflow-hidden w-full">
 
-        <section className="text-zinc-300 mask-b-from-75% mask-b-to-100% h-150 bg-cover bg-fixed bg-right w-full" style={{backgroundImage: `url(${hero.backgrounds?.[2]?.url})`}}>
+        <section className="text-zinc-300 mask-b-from-75% mask-b-to-100% h-150 bg-cover bg-fixed xl:bg-right bg-position-[75%_50%] w-full" style={{ backgroundImage: `url(${hero.backgrounds?.[2]?.url})` }}>
           <div className="flex justify-between w-full h-full overflow-hidden " >
 
             <div className="m-10 flex flex-col justify-between pb-20">
@@ -88,7 +88,7 @@ export default async function hero({ params }: PageProps) {
                 <p className="font-semibold">{hero.role} | {hero.subrole}</p>
               </div>
 
-              <p className="text-2xl w-[80%] text-zinc-200">{hero.description}</p>
+              <p className="md:text-2xl text-xl text-justify w-[80%] text-zinc-200">{hero.description}</p>
 
               <ul className=" text-sm text-zinc-400">
                 <li><span className=" font-semibold">Location:</span> {hero.location}</li>
@@ -97,22 +97,21 @@ export default async function hero({ params }: PageProps) {
               </ul>
             </div>
 
-            <img src={hero.portrait} alt={`Portrait of ${hero.name}`} className="h-full opacity-75 hover:opacity-100 hover:pr-20 hover:pb-20 hover:scale-150 duration-500 ease-in-out mask-x-from-95% mask-x-to-100% bg-fixed" />
+            <img src={hero.portrait} alt={`Portrait of ${hero.name}`} className="h-full opacity-75 hover:opacity-100 hover:pr-20 hover:pb-20 hover:scale-150 duration-500 ease-in-out mask-x-from-95% mask-x-to-100% bg-fixed hidden xl:block" />
           </div>
         </section>
 
-        <section className="flex justify-center items-center gap-20 m-10 ">
-          <h2 className="text-3xl font-bold">Hit points:</h2>
+        <section className="flex justify-center items-center flex-col gap-5 md:gap-20 md:flex-row m-10">
+          <h2 className="text-2xl sm:text-3xl font-bold">Hit points:</h2>
 
           <HitPoints health={hero.hitpoints.health} armor={hero.hitpoints.armor} shield={hero.hitpoints.shields} total={hero.hitpoints.total} />
         </section>
 
 
         <TitleHero title="Story" />
-        <section className="flex flex-col items-center gap-10 ">
+        <section className="flex flex-col items-center gap-10 scale-90 sm:scale-100">
           <h3 className="text-3xl text-orange-400 font-bold">sumary</h3>
-          <div className="flex gap-5 snap-center">
-
+          <div className="flex items-center justify-center gap-5 snap-center flex-col lg:flex-row">
             {
               /* decompoe o link que a api manda e cria um link para um iframe de video */
               (() => {
@@ -125,21 +124,19 @@ export default async function hero({ params }: PageProps) {
                     title="Hero Story Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    className="zoom-150"
+                    className="w-[80%] h-75 md:w-125 md:h-75 rounded-lg shadow-xl shadow-zinc-500/50"
                   />
                 );
               })()}
 
-            <p className="w-lg">{hero.story.summary}</p>
+            <p className="w-[80%] max-w-lg m-5 indent-8 ">{hero.story.summary}</p>
           </div>
 
           <h4 className="text-2xl text-orange-400 font-bold">Chapters</h4>
           {hero.story.chapters?.map((chapter) => (
-            <div key={chapter.title} className="relative h-150 w-6xl overflow-hidden  hover:scale-110 duration-700 ease-in-out bg-cover bg-center" style={{backgroundImage: `url(${chapter.picture})`}}>
-              <div className="absolute top-0 p-10 flex flex-col justify-between size-full">
+            <div key={chapter.title} className="group flex flex-col gap-40 p-10  w-screen h-screen overflow-hidden lg:grayscale hover:grayscale-0 duration-500 ease-in-out bg-cover bg-position-[center_top] mask-y-from-80% mask-y-to-100%" style={{ backgroundImage: `url(${chapter.picture})` }}>
                 <h5 className="text-2xl text-orange-400 font-bold bg-gray-950/50 py-2 px-4 hover:bg-gray-900 duration-500 ease-in-out size-fit">{chapter.title}</h5>
-                <p className="bg-gray-950/50 py-2 px-4 hover:bg-gray-950 duration-500 ease-in-out">{chapter.content}</p>
-              </div>
+                <p className="bg-gray-950/50 py-2 px-4 hover:bg-gray-950 lg:opacity-0 group-hover:opacity-100 duration-500 ease-in-out indent-8 m-auto max-w-6xl">{chapter.content}</p>
             </div>
           ))}
 
