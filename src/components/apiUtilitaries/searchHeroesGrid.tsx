@@ -44,8 +44,14 @@ export default function SearchHeroesGrid() {
               <img src={hero.portrait} alt={hero.name} className="w-50" />
             </div>
             <h2 translate="no" className="text-2xl lg:text-4xl w-full text-center truncate">{hero.name}</h2>
-            <p>Role: {hero.role}</p>
-            <p>SubRole: {hero.subrole}</p>
+            <div className="flex justify-around w-full">
+              <div className="-skew-x-12 bg-orange-400/75 px-3 p-1 rounded-sm text-xl flex items-center">
+                <p className="skew-x-12">{hero.role}</p>
+              </div>
+              <div className="-skew-x-12 bg-orange-400/50 px-3 p-1 rounded-sm flex items-center">
+                <p className="skew-x-12">{hero.subrole}</p>
+              </div>
+            </div>
           </Link>
         ))}
       </section>
