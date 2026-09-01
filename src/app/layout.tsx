@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <Header />
-        <main className="min-h-screen flex flex-col items-center justify-center ">
+        <main className="min-h-screen flex flex-col items-center justify-center gap-10">
           {children}
         </main>
         <Footer />
