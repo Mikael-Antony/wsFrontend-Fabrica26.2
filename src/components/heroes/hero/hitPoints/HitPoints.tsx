@@ -38,7 +38,7 @@ export default function HitPoints({ health, armor, shield, total}: Hitpoints) {
   
   return (
     <div>
-      <div><span className="text-lg font-bold">{total} / {total}</span></div>
+      <div><span className="text-lg font-bold text-gray-100">{total} / {total}</span></div>
 
       <div className="flex mb-5">
         {/*organizacao dos dados de hitpoint de personagem*/}
