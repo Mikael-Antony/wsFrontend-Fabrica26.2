@@ -136,7 +136,7 @@ export default async function hero({ params }: PageProps) {
           {hero.story.chapters?.map((chapter) => (
             <div key={chapter.title} className="group flex flex-col gap-40 p-10  w-screen h-screen overflow-hidden lg:grayscale hover:grayscale-0 duration-500 ease-in-out bg-cover bg-position-[center_top] mask-y-from-80% mask-y-to-100%" style={{ backgroundImage: `url(${chapter.picture})` }}>
                 <h5 className="text-2xl text-orange-400 font-bold bg-gray-950/50 py-2 px-4 hover:bg-gray-900 duration-500 ease-in-out size-fit">{chapter.title}</h5>
-                <p className="bg-gray-950/50 py-2 px-4 hover:bg-gray-950 lg:opacity-0 group-hover:opacity-100 duration-500 ease-in-out indent-8 m-auto max-w-6xl">{chapter.content}</p>
+                <p className="bg-gray-950/50 py-2 px-4 text-zinc-300 hover:bg-gray-950 lg:opacity-0 group-hover:opacity-100 duration-500 ease-in-out indent-8 m-auto max-w-6xl">{chapter.content}</p>
             </div>
           ))}
 
