@@ -1,7 +1,8 @@
 'use client';
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getHeroes } from "@/services/getHeroes";
 import Link from "next/link";
+import Hero from "../heroSection/Hero";
 
 interface Hero {
   key: string;
@@ -12,20 +13,48 @@ interface Hero {
 };
 
 
-export default async function HeroesGrid() {
+export default function HeroesGrid() {
   const [ filterOrder, setFilterOrder ] = useState("a, b");
   const [ filterRole, setFilterRole ] = useState("");
   const [ filterSubrole, setFilterSubrole ] = useState("");
+  const [ heroes, setHeroes ] = useState<Hero[]>([]);
 
-  const heroes: Hero[] = await getHeroes();
-    
-  heroes.sort((a, b) => {
-    if (filterOrder === "a, b") {
-      return a.name.localeCompare(b.name);
-    } else {
-      return b.name.localeCompare(a.name);
-    }
-  });
+  // ordena os herois por nome, de A-Z ou Z-A
+  useEffect(() => {
+    const loadHeroes = async () => {
+      const data = await getHeroes();
+      const sorted = filterOrder === "a, b" 
+        ? [...data].sort((a, b) => a.name.localeCompare(b.name))
+        : [...data].sort((a, b) => b.name.localeCompare(a.name));
+      setHeroes(sorted);
+    };
+    loadHeroes();
+  }, [filterOrder]);
+
+  
+  // filtra os herois por role
+  useEffect(() => {
+    const loadHeroes = async () => {
+      const data = await getHeroes();
+      const filtered = data.filter((hero: { role: string; }) => {
+        return (filterRole === "" || hero.role === filterRole) 
+      });
+      setHeroes(filtered);
+    };
+    loadHeroes();
+  }, [filterRole]);
+  
+  // filtra os herois por subrole
+  useEffect(() => {
+    const loadHeroes = async () => {
+      const data = await getHeroes();
+      const filtered = data.filter((hero: { subrole: string; }) => {
+        return (filterSubrole === "" || hero.subrole === filterSubrole) 
+      });
+      setHeroes(filtered);
+    };
+    loadHeroes();
+  }, [filterSubrole]);
 
   return (
     <>
@@ -33,7 +62,7 @@ export default async function HeroesGrid() {
         <label htmlFor="filterRole" className="flex gap-2 items-center font-bold text-gray-700 dark:text-gray-300">
           Role:
           <select name="filterRole" id="filterRole" onChange={(e) => setFilterRole(e.target.value)} className="bg-[#bbb] dark:bg-zinc-950 text-black dark:text-white p-2 rounded-lg">
-              <option value="">All</option>
+              <option defaultValue="" value="">All</option>
               <option value="tank">Tank</option>
               <option value="damage">Damage</option>
               <option value="support">Support</option>
@@ -43,7 +72,7 @@ export default async function HeroesGrid() {
         <label htmlFor="filterSubrole" className="flex gap-2 items-center font-bold text-gray-700 dark:text-gray-300">
           SubRole:
           <select name="filterSubrole" id="filterSubrole" onChange={(e) => setFilterSubrole(e.target.value)} className="bg-[#bbb] dark:bg-zinc-950 text-black dark:text-white p-2 rounded-lg">
-              <option value="">All</option>
+              <option defaultValue="" value="">All</option>
               <option value="tactician">tactician</option>
               <option value="flanker">Flanker</option>
               <option value="sharpshooter">Sharpshooter</option>
@@ -61,7 +90,7 @@ export default async function HeroesGrid() {
         <label htmlFor="order" className="flex gap-2 items-center font-bold text-gray-700 dark:text-gray-300">
           Order:
           <select name="order" id="order" onChange={(e) => setFilterOrder(e.target.value)} className="bg-[#bbb] dark:bg-zinc-950 text-black dark:text-white p-2 rounded-lg">
-            <option value="a, b" selected>A-z</option>
+            <option defaultValue="a, b" value="a, b">A-z</option>
             <option value="z, a">Z-a</option>
           </select>
         </label>
